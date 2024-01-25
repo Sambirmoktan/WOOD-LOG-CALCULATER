@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wood Log Measurement Calculator</title>
+    <style>
+        body {
+            background-color: #ADD8E6; /* Classic background color */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        #createdBy {
+            color: #666;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Wood Log Measurement Calculator</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Circumference (x)</th>
+            <th>Length (y)</th>
+            <th>Measurement</th>
+        </tr>
+    </thead>
+    <tbody id="measurementTableBody">
+        <!-- Measurement rows will be added here dynamically -->
+    </tbody>
+</table>
+
+<p>Enter Circumference (x): <input type="text" id="circumferenceInput"></p>
+<p>Enter Length (y): <input type="text" id="lengthInput"></p>
+<button onclick="calculateMeasurement()">Calculate Measurement</button>
+<button onclick="resetForm()">Refresh</button>
+
+<p id="createdBy">Created by Sambir Moktan</p>
+
+<script>
+    function calculateMeasurement() {
+        // Get user input values
+        var x = parseFloat(document.getElementById("circumferenceInput").value);
+        var y = parseFloat(document.getElementById("lengthInput").value);
+
+        // Check if the inputs are valid numbers
+        if (!isNaN(x) && !isNaN(y)) {
+            // Calculate the measurement using the provided formula
+            var measurement = (x ** 2 * y) / 2304;
+
+            // Display the result in the table
+            var tableBody = document.getElementById("measurementTableBody");
+            var newRow = tableBody.insertRow(-1);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            cell1.innerHTML = x;
+            cell2.innerHTML = y;
+            cell3.innerHTML = measurement.toFixed(2); // Displaying measurement with two decimal places
+        } else {
+            alert("Please enter valid numeric values for x and y.");
+        }
+    }
+
+    function resetForm() {
+        // Clear input fields
+        document.getElementById("circumferenceInput").value = "";
+        document.getElementById("lengthInput").value = "";
+
+        // Clear the measurement table
+        var tableBody = document.getElementById("measurementTableBody");
+        tableBody.innerHTML = "";
+    }
+</script>
+
+</body>
+</html>
